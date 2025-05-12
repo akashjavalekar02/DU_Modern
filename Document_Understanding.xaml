@@ -50,6 +50,9 @@
       <x:String>System.ComponentModel</x:String>
       <x:String>System.Collections.Specialized</x:String>
       <x:String>System.Numerics</x:String>
+      <x:String>System.Xml.Serialization</x:String>
+      <x:String>UiPath.Excel</x:String>
+      <x:String>UiPath.Excel.Activities</x:String>
     </sco:Collection>
   </TextExpression.NamespacesForImplementation>
   <TextExpression.ReferencesForImplementation>
@@ -114,20 +117,28 @@
       <AssemblyReference>System.ComponentModel.Primitives</AssemblyReference>
       <AssemblyReference>System.Collections.Specialized</AssemblyReference>
       <AssemblyReference>System.Runtime.Numerics</AssemblyReference>
+      <AssemblyReference>System.Data.SqlClient</AssemblyReference>
+      <AssemblyReference>System.Private.Xml</AssemblyReference>
+      <AssemblyReference>UiPath.Excel</AssemblyReference>
+      <AssemblyReference>UiPath.Excel.Activities</AssemblyReference>
+      <AssemblyReference>System.IO.FileSystem.Watcher</AssemblyReference>
+      <AssemblyReference>System.IO.Packaging</AssemblyReference>
+      <AssemblyReference>System.IO.FileSystem.AccessControl</AssemblyReference>
+      <AssemblyReference>System.IO.FileSystem.DriveInfo</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="Document_Understanding" sap:VirtualizedContainerService.HintSize="1144,1828.8" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="Document_Understanding" sap:VirtualizedContainerService.HintSize="1144,1778.4" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
-      <Variable x:TypeArguments="x:String" Name="username" />
-      <Variable x:TypeArguments="ss:SecureString" Name="Password" />
       <Variable x:TypeArguments="x:String" Name="Token" />
+      <Variable x:TypeArguments="x:String" Name="ClientId" />
+      <Variable x:TypeArguments="ss:SecureString" Name="ClientSecret" />
     </Sequence.Variables>
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <Sequence DisplayName="Document Understanding" sap:VirtualizedContainerService.HintSize="633.6,1805.6" sap2010:WorkflowViewState.IdRef="Sequence_2">
+    <Sequence DisplayName="Document Understanding" sap:VirtualizedContainerService.HintSize="633.6,1755.2" sap2010:WorkflowViewState.IdRef="Sequence_2">
       <Sequence.Variables>
         <Variable x:TypeArguments="scg:Dictionary(x:String, x:Object)" Name="Config" />
         <Variable x:TypeArguments="x:String" Default="C:\Users\Akash Javalekar\Documents\UiPath\ModernDu\Data\Config.xlsx" Name="ConfigFilePath" />
@@ -141,7 +152,15 @@
           <x:Boolean x:Key="IsPinned">False</x:Boolean>
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
-      <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="600,84.8" sap2010:WorkflowViewState.IdRef="LogMessage_9" Level="Info" Message="[&quot;Start Document Understanding&quot;]">
+      <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="600,174.4" sap2010:WorkflowViewState.IdRef="LogMessage_9" Level="Info" Message="[&quot;Start Document Understanding&quot;]">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </ui:LogMessage>
+      <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="600,56.8" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="[&quot;Read Document Understanding Config File&quot;]">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">False</x:Boolean>
@@ -149,15 +168,7 @@
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </ui:LogMessage>
-      <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="600,84.8" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="[&quot;Read Document Understanding Config File&quot;]">
-        <sap:WorkflowViewStateService.ViewState>
-          <scg:Dictionary x:TypeArguments="x:String, x:Object">
-            <x:Boolean x:Key="IsExpanded">False</x:Boolean>
-            <x:Boolean x:Key="IsPinned">False</x:Boolean>
-          </scg:Dictionary>
-        </sap:WorkflowViewStateService.ViewState>
-      </ui:LogMessage>
-      <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Read_Config - Invoke Workflow File (Read_Config.xaml)" sap:VirtualizedContainerService.HintSize="600,84.8" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_1" UnSafe="False" WorkflowFileName="Read_Config.xaml">
+      <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Read_Config - Invoke Workflow File (Read_Config.xaml)" sap:VirtualizedContainerService.HintSize="600,56.8" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_1" UnSafe="False" WorkflowFileName="Read_Config.xaml">
         <ui:InvokeWorkflowFile.Arguments>
           <InArgument x:TypeArguments="x:String" x:Key="in_ConfigFile">[ConfigFilePath]</InArgument>
           <InArgument x:TypeArguments="s:String[]" x:Key="in_ConfigSheets">[{"Settings","Constants"}]</InArgument>
@@ -170,7 +181,7 @@
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </ui:InvokeWorkflowFile>
-      <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="600,84.8" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="Info" Message="[&quot;Config File Read Successfully&quot;]">
+      <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="600,56.8" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="Info" Message="[&quot;Config File Read Successfully&quot;]">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">False</x:Boolean>
@@ -178,17 +189,17 @@
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </ui:LogMessage>
-      <ui:RetryScope DisplayName="Retry Scope" sap:VirtualizedContainerService.HintSize="600,84.8" sap2010:WorkflowViewState.IdRef="RetryScope_1">
+      <ui:RetryScope DisplayName="Retry Scope" sap:VirtualizedContainerService.HintSize="600,56.8" sap2010:WorkflowViewState.IdRef="RetryScope_2">
         <ui:RetryScope.ActivityBody>
           <ActivityAction>
-            <Sequence DisplayName="Action" sap:VirtualizedContainerService.HintSize="416,456.8" sap2010:WorkflowViewState.IdRef="Sequence_3">
+            <Sequence DisplayName="Action" sap:VirtualizedContainerService.HintSize="416,484.8" sap2010:WorkflowViewState.IdRef="Sequence_3">
               <sap:WorkflowViewStateService.ViewState>
                 <scg:Dictionary x:TypeArguments="x:String, x:Object">
                   <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                 </scg:Dictionary>
               </sap:WorkflowViewStateService.ViewState>
               <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="382.4,174.4" sap2010:WorkflowViewState.IdRef="LogMessage_5" Message="[&quot;Get Secret ID and Secret Credentials from Orchestrator&quot;]" />
-              <ui:GetRobotCredential TimeoutMS="{x:Null}" AssetName="[Config(&quot;DU_TokenCredentials&quot;).ToString]" CacheStrategy="None" DisplayName="Get Credential" sap:VirtualizedContainerService.HintSize="382.4,56.8" sap2010:WorkflowViewState.IdRef="GetRobotCredential_1" Password="[Password]" Username="[username]">
+              <ui:GetRobotCredential TimeoutMS="{x:Null}" AssetName="[Config(&quot;DU_TokenCredentials&quot;).ToString]" CacheStrategy="None" DisplayName="Get Credential" sap:VirtualizedContainerService.HintSize="382.4,84.8" sap2010:WorkflowViewState.IdRef="GetRobotCredential_1" Password="[ClientSecret]" Username="[ClientId]">
                 <sap:WorkflowViewStateService.ViewState>
                   <scg:Dictionary x:TypeArguments="x:String, x:Object">
                     <x:Boolean x:Key="IsExpanded">False</x:Boolean>
@@ -222,8 +233,8 @@
         </ui:HttpClient.Headers>
         <ui:HttpClient.Parameters>
           <InArgument x:TypeArguments="x:String" x:Key="grant_type">client_credentials</InArgument>
-          <InArgument x:TypeArguments="x:String" x:Key="client_id">[username]</InArgument>
-          <InArgument x:TypeArguments="x:String" x:Key="client_secret">[New System.Net.NetworkCredential("",Password).Password]</InArgument>
+          <InArgument x:TypeArguments="x:String" x:Key="client_id">[ClientId]</InArgument>
+          <InArgument x:TypeArguments="x:String" x:Key="client_secret">[New System.Net.NetworkCredential("",ClientSecret).Password]</InArgument>
         </ui:HttpClient.Parameters>
         <ui:HttpClient.UrlSegments>
           <scg:Dictionary x:TypeArguments="x:String, InArgument(x:String)" />
@@ -235,7 +246,7 @@
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </ui:HttpClient>
-      <If Condition="[TokenStatusCode.Equals(200)]" sap:VirtualizedContainerService.HintSize="600,84.8" sap2010:WorkflowViewState.IdRef="If_1">
+      <If Condition="[TokenStatusCode.Equals(200)]" sap:VirtualizedContainerService.HintSize="600,56.8" sap2010:WorkflowViewState.IdRef="If_1">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">False</x:Boolean>
@@ -468,8 +479,22 @@
         <x:Reference>__ReferenceID0</x:Reference>
         <x:Reference>__ReferenceID6</x:Reference>
       </Flowchart>
-      <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="600,174.4" sap2010:WorkflowViewState.IdRef="LogMessage_3" Level="Info" Message="[ExtractedData]" />
-      <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="600,165.6" sap2010:WorkflowViewState.IdRef="LogMessage_4" Level="Info" Message="[&quot;Extraction Completed for document : &quot; +Path.GetFileNameWithoutExtension(FilePath)]" />
+      <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="600,174.4" sap2010:WorkflowViewState.IdRef="LogMessage_3" Level="Info" Message="[ExtractedData]">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </ui:LogMessage>
+      <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="600,165.6" sap2010:WorkflowViewState.IdRef="LogMessage_4" Level="Info" Message="[&quot;Extraction Completed for document : &quot; +Path.GetFileName(FilePath)]">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </ui:LogMessage>
     </Sequence>
   </Sequence>
 </Activity>
